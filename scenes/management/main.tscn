@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://20n4024noof2"]
+[gd_scene load_steps=3 format=3 uid="uid://20n4024noof2"]
+
+[ext_resource type="PackedScene" uid="uid://beo6v36n1gjjd" path="res://scenes/level/level.tscn" id="1_4ln2c"]
+[ext_resource type="PackedScene" uid="uid://dwcy3i5wfah62" path="res://scenes/player/player.tscn" id="2_bevc2"]
 
 [node name="Main" type="Node"]
+
+[node name="Level" parent="." instance=ExtResource("1_4ln2c")]
+
+[node name="Player" parent="." instance=ExtResource("2_bevc2")]

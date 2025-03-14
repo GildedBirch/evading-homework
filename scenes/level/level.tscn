@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://beo6v36n1gjjd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_h3e3j"]
+sky_material = SubResource("ProceduralSkyMaterial_8y3pp")
+
+[sub_resource type="Environment" id="Environment_nbgty"]
+background_mode = 2
+sky = SubResource("Sky_h3e3j")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
+albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[node name="Level" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nbgty")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_8y3pp")
