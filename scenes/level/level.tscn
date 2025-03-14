@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=13 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
+[ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
+[ext_resource type="Texture2D" uid="uid://dogwmurqi3agv" path="res://assets/buttons/button_textures.png" id="3_qkmgm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,14 +19,23 @@ tonemap_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
 albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_nbgty"]
-height = 0.2
-radius = 0.2
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnne4"]
+size = Vector3(0.25, 0.2, 0.25)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_i166f"]
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.2
+[sub_resource type="BoxMesh" id="BoxMesh_vpf64"]
+material = ExtResource("2_i166f")
+size = Vector3(0.2, 0.1, 0.2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcngd"]
+atlas = ExtResource("3_qkmgm")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i166f"]
+albedo_color = Color(0.606076, 0.414131, 0.151156, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qkmgm"]
+material = SubResource("StandardMaterial3D_i166f")
+size = Vector3(0.25, 0.1, 0.25)
 
 [node name="Level" type="Node"]
 
@@ -40,13 +51,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
-[node name="Button3D" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
-button_mesh = NodePath("MeshInstance3D")
+[node name="JumButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+button_mesh = NodePath("ButtonTop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Button3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0939495, 0)
-shape = SubResource("CylinderShape3D_nbgty")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="JumButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_hnne4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951402, 0)
-mesh = SubResource("CylinderMesh_i166f")
+[node name="ButtonTop" type="MeshInstance3D" parent="JumButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_vpf64")
+
+[node name="Sprite3D" type="Sprite3D" parent="JumButton/ButtonTop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505914, 0)
+pixel_size = 0.02
+axis = 1
+texture_filter = 2
+texture = SubResource("AtlasTexture_wcngd")
+
+[node name="ButtonBase" type="MeshInstance3D" parent="JumButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
+mesh = SubResource("BoxMesh_qkmgm")
