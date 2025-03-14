@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=16 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 [ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
 [ext_resource type="Texture2D" uid="uid://dogwmurqi3agv" path="res://assets/buttons/button_textures.png" id="3_qkmgm"]
+[ext_resource type="PackedScene" uid="uid://dr3svxwy4pwf0" path="res://scenes/level/game_screen/game_screen.tscn" id="4_qkmgm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -37,6 +38,12 @@ albedo_color = Color(0.606076, 0.414131, 0.151156, 1)
 material = SubResource("StandardMaterial3D_i166f")
 size = Vector3(0.25, 0.1, 0.25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkmgm"]
+metallic_specular = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_hnne4"]
+size = Vector2(1.2, 0.6)
+
 [node name="Level" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -52,6 +59,7 @@ size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
 [node name="JumButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.559653, 0)
 button_mesh = NodePath("ButtonTop")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="JumButton"]
@@ -72,3 +80,12 @@ texture = SubResource("AtlasTexture_wcngd")
 [node name="ButtonBase" type="MeshInstance3D" parent="JumButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
 mesh = SubResource("BoxMesh_qkmgm")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_qkmgm")
+mesh = SubResource("QuadMesh_hnne4")
+
+[node name="GameScreen" parent="Screen" node_paths=PackedStringArray("target_screen", "jump_button") instance=ExtResource("4_qkmgm")]
+target_screen = NodePath("..")
+jump_button = NodePath("../../JumButton")

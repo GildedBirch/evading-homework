@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://dr3svxwy4pwf0"]
+
+[ext_resource type="Script" uid="uid://p5frryogakis" path="res://scenes/level/game_screen/game_screen.gd" id="1_xiv1n"]
+[ext_resource type="FontFile" uid="uid://5w8u2sf6ykfh" path="res://assets/fonts/monogram-extended.ttf" id="2_n3lex"]
+[ext_resource type="Script" uid="uid://cpyj57git286l" path="res://scenes/level/game_screen/player_2d.gd" id="3_o2rmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3lex"]
+size = Vector2(600, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2rmf"]
+size = Vector2(15, 30)
+
+[node name="GameScreen" type="SubViewport"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(600, 300)
+render_target_update_mode = 4
+script = ExtResource("1_xiv1n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 600.0
+offset_bottom = 300.0
+color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_top = 250.0
+offset_right = 600.0
+offset_bottom = 255.0
+color = Color(0.992157, 0.964706, 0.890196, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.992157, 0.964706, 0.890196, 1)
+theme_override_fonts/font = ExtResource("2_n3lex")
+theme_override_font_sizes/font_size = 32
+text = "000"
+horizontal_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(300, 275)
+shape = SubResource("RectangleShape2D_n3lex")
+
+[node name="Player2D" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(150, 250)
+script = ExtResource("3_o2rmf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2D"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_o2rmf")
+
+[node name="ColorRect" type="ColorRect" parent="Player2D"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.5
+offset_top = -30.0
+offset_right = 7.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.992157, 0.964706, 0.890196, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
