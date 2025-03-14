@@ -21,8 +21,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraPivot"]
 
+[node name="LookRay" type="RayCast3D" parent="CameraPivot"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="HandHolder" type="Node3D" parent="CameraPivot"]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.557941, -0.3, 0.623822)
+transform = Transform3D(0.965926, 0.0360207, 0.2563, 0, 0.990268, -0.139173, -0.258819, 0.134431, 0.956526, 0.557941, -0.3, 0.623822)
 
 [node name="RightHand" parent="CameraPivot/HandHolder" instance=ExtResource("2_gmlin")]
 unique_name_in_owner = true

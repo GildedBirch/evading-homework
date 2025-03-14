@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=8 format=3 uid="uid://beo6v36n1gjjd"]
+
+[ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,6 +17,15 @@ tonemap_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
 albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nbgty"]
+height = 0.2
+radius = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i166f"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.2
+
 [node name="Level" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -28,3 +39,14 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
+
+[node name="Button3D" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+button_mesh = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0939495, 0)
+shape = SubResource("CylinderShape3D_nbgty")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951402, 0)
+mesh = SubResource("CylinderMesh_i166f")

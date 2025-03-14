@@ -9,13 +9,14 @@ var mouse_motion: Vector2 = Vector2.ZERO
 
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var right_hand: Node3D = %RightHand
+@onready var look_ray: RayCast3D = %LookRay
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_camera_rotation()
 	
 	var input_dir: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_backward")
@@ -38,6 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
+		interact()
 		hand_press()
 
 
@@ -48,8 +50,13 @@ func handle_camera_rotation() -> void:
 	mouse_motion = Vector2.ZERO
 
 
+func interact() -> void:
+	var hit: Area3D = look_ray.get_collider()
+	if hit:
+		hit.interact()
+
+
 func hand_press() -> void:
-	print("yee")
 	var tween: Tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
