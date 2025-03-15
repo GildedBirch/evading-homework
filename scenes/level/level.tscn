@@ -1,13 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=34 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 [ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
+[ext_resource type="Texture2D" uid="uid://dnktni5rj35oo" path="res://assets/posters/poster_1.png" id="2_xv074"]
 [ext_resource type="Texture2D" uid="uid://dogwmurqi3agv" path="res://assets/buttons/button_textures.png" id="3_qkmgm"]
+[ext_resource type="Texture2D" uid="uid://rpjbjuf61dtn" path="res://assets/posters/poster_2.png" id="3_sytrn"]
 [ext_resource type="PackedScene" uid="uid://dr3svxwy4pwf0" path="res://scenes/level/game_screen/game_screen.tscn" id="4_qkmgm"]
+[ext_resource type="Texture2D" uid="uid://b8ty7garcukie" path="res://assets/posters/poster_3.png" id="4_tf2q7"]
 [ext_resource type="Texture2D" uid="uid://cxtbfsmylqq62" path="res://assets/textures/base_texture.png" id="5_hnne4"]
-[ext_resource type="AudioStream" uid="uid://bh8l14p35fcx4" path="res://assets/sounds/music/Three Red Hearts - Deep Blue.ogg" id="6_xv074"]
-[ext_resource type="AudioStream" uid="uid://btdmo57hpwmud" path="res://assets/sounds/music/Three Red Hearts - Box Jump.ogg" id="7_sytrn"]
-[ext_resource type="AudioStream" uid="uid://dexm1fq3f53p4" path="res://assets/sounds/music/Three Red Hearts - Out of Time.ogg" id="8_tf2q7"]
+[ext_resource type="FontFile" uid="uid://5w8u2sf6ykfh" path="res://assets/fonts/monogram-extended.ttf" id="5_sytrn"]
+[ext_resource type="Script" uid="uid://b3uo750lrh5hs" path="res://scenes/level/door_handle.gd" id="5_tf2q7"]
+[ext_resource type="Script" uid="uid://cprcx6tl4w25k" path="res://scenes/level/light_bulb.gd" id="7_pe1ox"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,12 +20,58 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_8y3pp")
 
 [sub_resource type="Environment" id="Environment_nbgty"]
-background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_h3e3j")
+ambient_light_energy = 0.0
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
-albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+albedo_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xv074"]
+albedo_color = Color(0.137744, 0.176028, 0.160508, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0bv2"]
+albedo_color = Color(0.377845, 0.371256, 0.342236, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sytrn"]
+albedo_color = Color(0.650651, 0.515347, 0.328709, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf2q7"]
+albedo_color = Color(0.33044, 0.251194, 0.140464, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xv074"]
+size = Vector3(0.143555, 0.139648, 0.100586)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe1ox"]
+albedo_color = Color(0.293366, 0.296822, 0.295969, 1)
+albedo_texture = ExtResource("5_hnne4")
+metallic = 0.65
+roughness = 0.39
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7m21"]
+emission_enabled = true
+emission = Color(0.94, 0.91274, 0.1222, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tf2q7"]
+size = Vector3(0.3, 0.3, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hnne4"]
 size = Vector3(0.25, 0.2, 0.25)
@@ -67,15 +116,6 @@ uv1_scale = Vector3(2, 2, 2)
 uv1_triplanar = true
 texture_filter = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qkmgm"]
-size = Vector3(1, 1.61423, 0.526489)
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_pe1ox"]
-stream_count = 3
-stream_0 = ExtResource("6_xv074")
-stream_1 = ExtResource("7_sytrn")
-stream_2 = ExtResource("8_tf2q7")
-
 [node name="Level" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -85,19 +125,152 @@ environment = SubResource("Environment_nbgty")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Scenery" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Scenery"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
-[node name="GameSetup" type="Node3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+size = Vector3(6, 3, 0.2)
+material = SubResource("StandardMaterial3D_xv074")
 
-[node name="GameScreen" parent="GameSetup" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button", "shoot_up_button", "music_player") instance=ExtResource("4_qkmgm")]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
+size = Vector3(6, 3, 0.2)
+material = SubResource("StandardMaterial3D_xv074")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 1.5, 1.5)
+size = Vector3(0.2, 3, 5.2)
+material = SubResource("StandardMaterial3D_xv074")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 1.5, 1.5)
+size = Vector3(0.2, 3, 5.2)
+material = SubResource("StandardMaterial3D_xv074")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 1.5)
+size = Vector3(6.4, 0.2, 5.2)
+material = SubResource("StandardMaterial3D_m0bv2")
+
+[node name="Poster_1" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(0.986703, 0.162534, 0, -0.162534, 0.986703, 0, 0, 0, 1, -1.76995, 1.64359, -0.876664)
+shaded = true
+texture_filter = 0
+texture = ExtResource("2_xv074")
+
+[node name="Poster_5" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(-4.31302e-08, -7.10458e-09, 1, 0.117503, 0.993073, 1.21233e-08, -0.993073, 0.117503, -4.19966e-08, -2.97441, 2.0309, 2.74224)
+shaded = true
+texture_filter = 0
+texture = ExtResource("2_xv074")
+
+[node name="Poster_2" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0.123238, 0.992377, -5.38689e-09, 0.992377, -0.123238, -4.33782e-08, 2.9676, 1.37913, 0.471384)
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_sytrn")
+
+[node name="Poster_4" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(1.30468e-07, -1.07738e-08, 1, -0.117173, 0.993111, 2.59869e-08, -0.993111, -0.117173, 1.28307e-07, -2.97526, 1.37913, 1.16944)
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_sytrn")
+
+[node name="Poster_3" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(-4.37114e-08, 0, -1, -0.115631, 0.993292, 5.05438e-09, 0.993292, 0.115631, -4.34182e-08, 2.99881, 1.58893, 2.76807)
+shaded = true
+texture_filter = 0
+texture = ExtResource("4_tf2q7")
+
+[node name="Poster_6" type="Sprite3D" parent="Scenery"]
+transform = Transform3D(-0.918032, 0.396507, 7.79836e-08, 0.396507, 0.918032, -3.91876e-08, -8.71296e-08, -5.05438e-09, -1, -1.50979, 1.58501, 3.88991)
+shaded = true
+texture_filter = 0
+texture = ExtResource("4_tf2q7")
+
+[node name="Door" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6139, 1.21274, 3.88512)
+size = Vector3(1.50049, 2.49481, 0.142578)
+material = SubResource("StandardMaterial3D_sytrn")
+
+[node name="Door2" type="CSGBox3D" parent="Scenery/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056076, -0.0976)
+operation = 2
+size = Vector3(1.28223, 2.38266, 0.142578)
+material = SubResource("StandardMaterial3D_tf2q7")
+
+[node name="DoorHandle" type="Area3D" parent="Scenery/Door/Door2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.488323, 0, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_tf2q7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Door/Door2/DoorHandle"]
+shape = SubResource("BoxShape3D_xv074")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Scenery/Door/Door2/DoorHandle"]
+radius = 0.05
+material = SubResource("StandardMaterial3D_pe1ox")
+
+[node name="LockedLabel" type="Label" parent="Scenery/Door/Door2/DoorHandle"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -312.0
+offset_top = -104.0
+offset_right = 312.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.818234, 0.771363, 0.61239, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("5_sytrn")
+theme_override_font_sizes/font_size = 64
+text = "Locked from the other side"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0719855, 2.96276, 1.48215)
+size = Vector3(0.1, 0.191406, 0.1)
+
+[node name="LightBulb" type="Area3D" parent="Scenery/CSGBox3D"]
+script = ExtResource("7_pe1ox")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Scenery/CSGBox3D/LightBulb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.148674, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_b7m21")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Scenery/CSGBox3D/LightBulb/CSGSphere3D"]
+layers = 3
+light_color = Color(0.922454, 0.865408, 0.783429, 1)
+light_energy = 2.562
+omni_range = 4.729
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/CSGBox3D/LightBulb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207813, 0)
+shape = SubResource("BoxShape3D_tf2q7")
+
+[node name="GameSetup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39454)
+
+[node name="GameScreen" parent="GameSetup" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button", "shoot_up_button", "music_player", "effect_player") instance=ExtResource("4_qkmgm")]
 target_screen = NodePath("../Screen")
 jump_button = NodePath("../JumpButton")
 shoot_button = NodePath("../ShootButton")
 shoot_up_button = NodePath("../ShootUpButton")
 music_player = NodePath("../MusicPlayer")
+effect_player = NodePath("../EffectPlayer")
 
 [node name="JumpButton" parent="GameSetup" node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00150104, 0.762436, -0.0320297)
@@ -176,6 +349,7 @@ skeleton = NodePath("../..")
 
 [node name="Monitor" type="CSGBox3D" parent="GameSetup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.811029, -0.236389)
+use_collision = true
 size = Vector3(1.41382, 1.61383, 0.527222)
 material = SubResource("StandardMaterial3D_hnne4")
 
@@ -185,14 +359,11 @@ operation = 2
 size = Vector3(1.18555, 0.585297, 0.30658)
 material = SubResource("StandardMaterial3D_vpf64")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GameSetup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202783, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GameSetup/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605187, -0.236755)
-shape = SubResource("BoxShape3D_qkmgm")
-
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="GameSetup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22284, -0.259929)
-stream = SubResource("AudioStreamPlaylist_pe1ox")
+volume_db = -30.0
 bus = &"Music"
+
+[node name="EffectPlayer" type="AudioStreamPlayer3D" parent="GameSetup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22284, -0.259929)
+volume_db = -30.0

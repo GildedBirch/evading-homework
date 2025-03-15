@@ -25,6 +25,7 @@ func _physics_process(delta: float) -> void:
 func jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		SignalBus.play_sound.emit(&"Jump")
 
 
 func shoot(dir: Projectile.MoveDirection) -> void:
@@ -37,6 +38,7 @@ func shoot(dir: Projectile.MoveDirection) -> void:
 	projectile.global_position = global_position - Vector2(0, 20)
 	projectile.direction = dir
 	bullet_cooldown_timer.start()
+	SignalBus.play_sound.emit(&"Shoot")
 
 
 func _on_bullet_cooldown_timer_timeout() -> void:

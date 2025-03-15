@@ -29,6 +29,7 @@ func _on_body_entered(_body: Node2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free()
 	if type == ObstacleType.SHOOT or type == ObstacleType.FLY:
+		SignalBus.play_sound.emit(&"Hit")
 		queue_free()
 
 
