@@ -6,7 +6,6 @@ signal pressed
 
 @export var press_depth: float = 0.05
 @export var button_mesh: Node3D
-
 var button_mesh_pos: Vector3
 
 

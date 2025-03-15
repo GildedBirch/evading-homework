@@ -18,19 +18,16 @@ const SOUNDS: Dictionary = {
 	&"Shoot": preload("res://assets/sounds/effects/Retro Weapon Gun LoFi 03.wav"),
 	&"Hit": preload("res://assets/sounds/effects/Retro Explosion Short 15.wav"),
 }
-
 @export var target_screen: MeshInstance3D
 @export var jump_button: Button3D
 @export var shoot_button: Button3D
 @export var shoot_up_button: Button3D
 @export var music_player: AudioStreamPlayer3D
 @export var effect_player: AudioStreamPlayer3D
-
 var _game_running:bool = false
 var score: int = 0
 var top_score: int = 0
 var speed_multiplier: float = 0
-
 @onready var player_2d: Player2d = %Player2D
 @onready var obstacle_spawn_point: Marker2D = %ObstacleSpawnPoint
 @onready var fly_spawn_point: Marker2D = %FlySpawnPoint

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=39 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 [ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://5w8u2sf6ykfh" path="res://assets/fonts/monogram-extended.ttf" id="5_sytrn"]
 [ext_resource type="Script" uid="uid://b3uo750lrh5hs" path="res://scenes/level/door_handle.gd" id="5_tf2q7"]
 [ext_resource type="Script" uid="uid://cprcx6tl4w25k" path="res://scenes/level/light_bulb.gd" id="7_pe1ox"]
+[ext_resource type="Script" uid="uid://7k3seqbypvoe" path="res://scenes/level/hand.gd" id="8_m0bv2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -39,6 +40,12 @@ texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0bv2"]
 albedo_color = Color(0.377845, 0.371256, 0.342236, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm6rs"]
+albedo_color = Color(0.26629, 0.240471, 0.157744, 1)
 albedo_texture = ExtResource("5_hnne4")
 uv1_triplanar = true
 texture_filter = 0
@@ -72,6 +79,21 @@ emission = Color(0.94, 0.91274, 0.1222, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tf2q7"]
 size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7m21"]
+size = Vector3(0.691345, 0.220947, 0.291992)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrc4q"]
+albedo_color = Color(0.72411, 0.475865, 0.36735, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4oov"]
+albedo_color = Color(0.61277, 0, 0.147351, 1)
+albedo_texture = ExtResource("5_hnne4")
+uv1_triplanar = true
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hnne4"]
 size = Vector3(0.25, 0.2, 0.25)
@@ -127,71 +149,132 @@ shadow_enabled = true
 
 [node name="Scenery" type="Node3D" parent="."]
 
-[node name="Floor" type="CSGBox3D" parent="Scenery"]
+[node name="room" type="Node3D" parent="Scenery"]
+
+[node name="Floor" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Scenery"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
 size = Vector3(6, 3, 0.2)
 material = SubResource("StandardMaterial3D_xv074")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Scenery"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
 size = Vector3(6, 3, 0.2)
 material = SubResource("StandardMaterial3D_xv074")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Scenery"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 1.5, 1.5)
 size = Vector3(0.2, 3, 5.2)
 material = SubResource("StandardMaterial3D_xv074")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Scenery"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 1.5, 1.5)
 size = Vector3(0.2, 3, 5.2)
 material = SubResource("StandardMaterial3D_xv074")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Scenery"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 1.5)
 size = Vector3(6.4, 0.2, 5.2)
 material = SubResource("StandardMaterial3D_m0bv2")
 
-[node name="Poster_1" type="Sprite3D" parent="Scenery"]
+[node name="Posters" type="Node3D" parent="Scenery"]
+
+[node name="Poster_1" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(0.986703, 0.162534, 0, -0.162534, 0.986703, 0, 0, 0, 1, -1.76995, 1.64359, -0.876664)
 shaded = true
 texture_filter = 0
 texture = ExtResource("2_xv074")
 
-[node name="Poster_5" type="Sprite3D" parent="Scenery"]
+[node name="Poster_5" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(-4.31302e-08, -7.10458e-09, 1, 0.117503, 0.993073, 1.21233e-08, -0.993073, 0.117503, -4.19966e-08, -2.97441, 2.0309, 2.74224)
 shaded = true
 texture_filter = 0
 texture = ExtResource("2_xv074")
 
-[node name="Poster_2" type="Sprite3D" parent="Scenery"]
+[node name="Poster_2" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0.123238, 0.992377, -5.38689e-09, 0.992377, -0.123238, -4.33782e-08, 2.9676, 1.37913, 0.471384)
 shaded = true
 texture_filter = 0
 texture = ExtResource("3_sytrn")
 
-[node name="Poster_4" type="Sprite3D" parent="Scenery"]
+[node name="Poster_4" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(1.30468e-07, -1.07738e-08, 1, -0.117173, 0.993111, 2.59869e-08, -0.993111, -0.117173, 1.28307e-07, -2.97526, 1.37913, 1.16944)
 shaded = true
 texture_filter = 0
 texture = ExtResource("3_sytrn")
 
-[node name="Poster_3" type="Sprite3D" parent="Scenery"]
+[node name="Poster_3" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(-4.37114e-08, 0, -1, -0.115631, 0.993292, 5.05438e-09, 0.993292, 0.115631, -4.34182e-08, 2.99881, 1.58893, 2.76807)
 shaded = true
 texture_filter = 0
 texture = ExtResource("4_tf2q7")
 
-[node name="Poster_6" type="Sprite3D" parent="Scenery"]
+[node name="Poster_6" type="Sprite3D" parent="Scenery/Posters"]
 transform = Transform3D(-0.918032, 0.396507, 7.79836e-08, 0.396507, 0.918032, -3.91876e-08, -8.71296e-08, -5.05438e-09, -1, -1.50979, 1.58501, 3.88991)
 shaded = true
 texture_filter = 0
 texture = ExtResource("4_tf2q7")
+
+[node name="Chair" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(0.771025, 0, -0.636805, 0, 1, 0, 0.636805, 0, 0.771025, 1.94712, 0.526617, -0.048064)
+use_collision = true
+size = Vector3(0.6, 0.1, 0.6)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair2" type="CSGBox3D" parent="Scenery/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.275, -0.25)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair3" type="CSGBox3D" parent="Scenery/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.275, 0.25)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair4" type="CSGBox3D" parent="Scenery/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.275, 0.25)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair5" type="CSGBox3D" parent="Scenery/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.275, -0.25)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair6" type="CSGBox3D" parent="Scenery/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -0.25)
+size = Vector3(0.6, 0.65, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Table" type="CSGBox3D" parent="Scenery"]
+transform = Transform3D(0.108693, 0, -0.994075, 0, 1, 0, 0.994075, 0, 0.108693, -2.28911, 0.526617, 2.94726)
+use_collision = true
+size = Vector3(1.7, 0.1, 1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair2" type="CSGBox3D" parent="Scenery/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.275, -0.45)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair3" type="CSGBox3D" parent="Scenery/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.275, 0.45)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair4" type="CSGBox3D" parent="Scenery/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.275, 0.45)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
+
+[node name="Chair5" type="CSGBox3D" parent="Scenery/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.275, -0.45)
+size = Vector3(0.1, 0.45, 0.1)
+material = SubResource("StandardMaterial3D_pm6rs")
 
 [node name="Door" type="CSGBox3D" parent="Scenery"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6139, 1.21274, 3.88512)
@@ -263,6 +346,84 @@ omni_range = 4.729
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/CSGBox3D/LightBulb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.207813, 0)
 shape = SubResource("BoxShape3D_tf2q7")
+
+[node name="Hand" type="Area3D" parent="Scenery"]
+transform = Transform3D(0.227603, 0, 0.973754, 0, 1, 0, -0.973754, 0, 0.227603, -2.10307, 0.60114, 2.51344)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_m0bv2")
+
+[node name="HandLabel" type="Label" parent="Scenery/Hand"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -312.0
+offset_top = -104.0
+offset_right = 312.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.818234, 0.771363, 0.61239, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("5_sytrn")
+theme_override_font_sizes/font_size = 64
+text = "I miss the time I could still point with it..."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.274506, -0.0292969, 0)
+shape = SubResource("BoxShape3D_b7m21")
+
+[node name="HandMesh" type="CSGBox3D" parent="Scenery/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.34541, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand2" type="CSGBox3D" parent="Scenery/Hand/HandMesh"]
+transform = Transform3D(1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, 1, -0.273354, 0, 7.15256e-07)
+size = Vector3(0.200366, 0.0859375, 0.0810547)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand3" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15408, 0, 0.00308084)
+size = Vector3(0.113855, 0.0549316, 0.130371)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand4" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2/Hand3"]
+transform = Transform3D(0.828696, 0, -0.559699, 0, 1, 0, 0.559699, 0, 0.828696, -0.0203025, 0, -0.0756168)
+size = Vector3(0.113855, 0.0236816, 0.03125)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand5" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2/Hand3"]
+transform = Transform3D(0.997521, 0, -0.0703658, 0, 1, 0, 0.0703658, 0, 0.997521, -0.106633, 0, -0.0456157)
+size = Vector3(0.113855, 0.0236816, 0.03125)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand6" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2/Hand3"]
+transform = Transform3D(0.999169, 0, 0.0407426, 0, 1, 0, -0.0407426, 0, 0.999169, -0.119551, 0, -0.00612354)
+size = Vector3(0.131146, 0.0236816, 0.03125)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand7" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2/Hand3"]
+transform = Transform3D(0.999169, 0, 0.0407428, 0, 1, 0, -0.0407428, 0, 0.999169, -0.111565, 0, 0.0252323)
+size = Vector3(0.108197, 0.0236816, 0.03125)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="Hand8" type="CSGBox3D" parent="Scenery/Hand/HandMesh/Hand2/Hand3"]
+transform = Transform3D(0.948329, 0, 0.317288, 0, 1, 0, -0.317288, 0, 0.948329, -0.094892, 0, 0.0698402)
+size = Vector3(0.113855, 0.0236816, 0.03125)
+material = SubResource("StandardMaterial3D_vrc4q")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scenery/Hand/HandMesh"]
+transform = Transform3D(1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, 1, 0.127747, 0, 2.38419e-07)
+operation = 2
+size = Vector3(0.273071, 0.183594, 0.246094)
+material = SubResource("StandardMaterial3D_x4oov")
 
 [node name="GameSetup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39454)

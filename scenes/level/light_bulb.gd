@@ -10,9 +10,7 @@ const COLORS: Array[Color] = [
 	Color("#c092c8"),
 	Color("#da8c8e"),
 ]
-
 var current_color: int = 1
-
 @onready var omni_light_3d: OmniLight3D = %OmniLight3D
 
 

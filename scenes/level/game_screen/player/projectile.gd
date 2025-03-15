@@ -1,6 +1,7 @@
 class_name Projectile
 extends Area2D
 
+
 enum MoveDirection{FORWARD, UP}
 var direction: MoveDirection = MoveDirection.FORWARD
 var speed: float = 1.0

@@ -4,9 +4,7 @@ extends CharacterBody2D
 
 const JUMP_VELOCITY = -400.0
 const PROJECTILE = preload("res://scenes/level/game_screen/player/projectile.tscn")
-
 var can_shoot: bool = true
-
 @onready var bullet_cooldown_timer: Timer = %BulletCooldownTimer
 
 

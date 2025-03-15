@@ -2,11 +2,9 @@ class_name Player
 extends CharacterBody3D
 
 
-var mouse_motion: Vector2 = Vector2.ZERO
-
 @export var speed: float = 5.0
 @export var mouse_sens: float = 0.002
-
+var mouse_motion: Vector2 = Vector2.ZERO
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var right_hand: Node3D = %RightHand
 @onready var look_ray: RayCast3D = %LookRay
