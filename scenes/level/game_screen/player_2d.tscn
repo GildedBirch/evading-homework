@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://2r2pmnu675je"]
+
+[ext_resource type="Script" uid="uid://cpyj57git286l" path="res://scenes/level/game_screen/player_2d.gd" id="1_ts4kl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2rmf"]
+size = Vector2(15, 30)
+
+[node name="Player2D" type="CharacterBody2D"]
+script = ExtResource("1_ts4kl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_o2rmf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7.5
+offset_top = -30.0
+offset_right = 7.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.992157, 0.964706, 0.890196, 1)
+
+[node name="BulletCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true

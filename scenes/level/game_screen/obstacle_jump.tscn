@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bevu3i3u5lf72"]
+
+[ext_resource type="Script" uid="uid://ctjdcf0v7x0xm" path="res://scenes/level/game_screen/obstacle.gd" id="1_ju6ui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6n4ms"]
+size = Vector2(14, 40)
+
+[node name="ObstacleJump" type="Area2D"]
+script = ExtResource("1_ju6ui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_6n4ms")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -40.0
+offset_right = 7.0
