@@ -13,11 +13,11 @@ func _ready() -> void:
 	SignalBus.game_over.connect(_on_game_over)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position.x -= speed
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	SignalBus.game_over.emit()
 
 
