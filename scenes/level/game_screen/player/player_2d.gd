@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 
 const JUMP_VELOCITY = -400.0
-const PROJECTILE = preload("res://scenes/level/game_screen/projectile.tscn")
+const PROJECTILE = preload("res://scenes/level/game_screen/player/projectile.tscn")
 
 var can_shoot: bool = true
 

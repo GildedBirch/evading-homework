@@ -15,6 +15,10 @@ run/main_scene="uid://20n4024noof2"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://assets/textures/icon.svg"
 
+[autoload]
+
+SignalBus="*res://auto_load/signal_bus.gd"
+
 [display]
 
 window/size/viewport_width=1920

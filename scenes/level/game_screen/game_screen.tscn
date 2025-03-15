@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://p5frryogakis" path="res://scenes/level/game_screen/game_screen.gd" id="1_xiv1n"]
 [ext_resource type="FontFile" uid="uid://5w8u2sf6ykfh" path="res://assets/fonts/monogram-extended.ttf" id="2_n3lex"]
-[ext_resource type="PackedScene" uid="uid://2r2pmnu675je" path="res://scenes/level/game_screen/player_2d.tscn" id="3_o2rmf"]
+[ext_resource type="PackedScene" uid="uid://2r2pmnu675je" path="res://scenes/level/game_screen/player/player_2d.tscn" id="3_o2rmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3lex"]
 size = Vector2(600, 50)
@@ -50,7 +50,15 @@ shape = SubResource("RectangleShape2D_n3lex")
 unique_name_in_owner = true
 position = Vector2(150, 250)
 
+[node name="ObstacleSpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(620, 251)
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
