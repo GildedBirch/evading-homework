@@ -37,8 +37,19 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.992157, 0.964706, 0.890196, 1)
 theme_override_fonts/font = ExtResource("2_n3lex")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 47
 text = "000"
+horizontal_alignment = 1
+
+[node name="TopScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 110.0
+offset_bottom = 26.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.992157, 0.964706, 0.890196, 1)
+theme_override_fonts/font = ExtResource("2_n3lex")
+theme_override_font_sizes/font_size = 32
+text = "TOP: 000"
 horizontal_alignment = 1
 
 [node name="StartGameLabel" type="Label" parent="."]
@@ -71,6 +82,10 @@ position = Vector2(150, 250)
 [node name="ObstacleSpawnPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(620, 251)
+
+[node name="FlySpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(148, -41)
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true

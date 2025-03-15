@@ -2,7 +2,7 @@ class_name  Obstacle
 extends Area2D
 
 
-enum ObstacleType{JUMP, SHOOT}
+enum ObstacleType{JUMP, SHOOT, FLY}
 @export var type: ObstacleType
 var speed: float = 1.0
 
@@ -14,7 +14,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	global_position.x -= speed
+	if type == ObstacleType.FLY:
+		global_position.y += speed * 0.5
+	else:
+		global_position.x -= speed
 	if global_position.x < -50:
 		queue_free()
 
@@ -25,7 +28,7 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free()
-	if type == ObstacleType.SHOOT:
+	if type == ObstacleType.SHOOT or type == ObstacleType.FLY:
 		queue_free()
 
 

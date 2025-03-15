@@ -2,25 +2,34 @@ class_name GameScreen
 extends SubViewport
 
 
-const OBSTACLES: Array = [
+const GROUND_OBSTACLES: Array = [
 	preload("res://scenes/level/game_screen/obstacles/obstacle_jump.tscn"),
 	preload("res://scenes/level/game_screen/obstacles/obstacle_shoot.tscn"),
+	]
+const OBSTACLE_FLY = preload("res://scenes/level/game_screen/obstacles/obstacle_fly.tscn")
+const MUSIC: Array = [
+	preload("res://assets/sounds/music/Three Red Hearts - Deep Blue.ogg"),
+	preload("res://assets/sounds/music/Three Red Hearts - Box Jump.ogg"),
+	preload("res://assets/sounds/music/Three Red Hearts - Out of Time.ogg"),
 	]
 
 @export var target_screen: MeshInstance3D
 @export var jump_button: Button3D
 @export var shoot_button: Button3D
 @export var shoot_up_button: Button3D
+@export var music_player: AudioStreamPlayer3D
 
 var _game_running:bool = false
-var score: int = 0
+var score: int = 90
 var top_score: int = 0
 var speed_multiplier: float = 0
 
 @onready var player_2d: Player2d = %Player2D
 @onready var obstacle_spawn_point: Marker2D = %ObstacleSpawnPoint
+@onready var fly_spawn_point: Marker2D = %FlySpawnPoint
 @onready var obstacle_spawn_timer: Timer = %ObstacleSpawnTimer
 @onready var score_label: Label = %ScoreLabel
+@onready var top_score_label: Label = %TopScoreLabel
 @onready var start_game_label: Label = %StartGameLabel
 @onready var score_timer: Timer = %ScoreTimer
 
@@ -62,19 +71,38 @@ func _start_game() -> void:
 	start_game_label.hide()
 	obstacle_spawn_timer.start()
 	score_timer.start()
+	music_player.stream = MUSIC[0]
+	music_player.play()
 
 
 func _on_obstacle_spawn_timer_timeout() -> void:
 	obstacle_spawn_timer.wait_time = randf_range(1.0 - speed_multiplier, 3.0 - speed_multiplier)
-	var obstacle: Obstacle = OBSTACLES.pick_random().instantiate()
-	add_child(obstacle)
-	obstacle.global_position = obstacle_spawn_point.global_position
+	_spawn_obstacle(GROUND_OBSTACLES.pick_random(), obstacle_spawn_point.global_position)
+	if randf() > 1.0 - speed_multiplier:
+		_spawn_obstacle(OBSTACLE_FLY, fly_spawn_point.global_position)
+
+
+func _spawn_obstacle(obstacle: PackedScene, pos: Vector2) -> void:
+	var new_obstacle: Obstacle = obstacle.instantiate()
+	add_child(new_obstacle)
+	new_obstacle.global_position = pos
 
 
 func _on_score_timer_timeout() -> void:
 	score += 1
 	score_label.text = "%03d" % score
-	speed_multiplier = (score / 25) * 0.05
+	@warning_ignore("integer_division")
+	speed_multiplier = min(0.5, (score / 25) * 0.05)
+	#if score == 100:
+		
+		#var tween = get_tree().create_tween()
+		#tween.tween_property(music_player, "volume_db", -80.0, 0.5)
+		#await tween.finished
+		#music_player.stop()
+		#music_player.stream = MUSIC[1]
+		#music_player.play()
+		#tween.stop()
+		#tween.tween_property(music_player, "volume_db", 0.0, 0.5)
 
 
 func _on_game_over() -> void:
@@ -83,5 +111,10 @@ func _on_game_over() -> void:
 	_game_running = false
 	if score > top_score:
 		top_score = score
+		top_score_label.text = "TOP: %03d" % top_score
 	score = 0
 	start_game_label.show()
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(music_player, "volume_db", -80, 2.0)
+	await tween.finished
+	music_player.stop()
