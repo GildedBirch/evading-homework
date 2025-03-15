@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=41 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="Script" uid="uid://dtp8m6mj3to3a" path="res://scenes/level/level.gd" id="1_b7m21"]
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
@@ -117,6 +117,10 @@ texture_filter = 0
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcngd"]
 atlas = ExtResource("3_qkmgm")
 region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7m21"]
+atlas = ExtResource("3_qkmgm")
+region = Rect2(80, 0, 8, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkmgm"]
 metallic_specular = 0.0
@@ -472,7 +476,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.274506, -0.0292969, 0)
 shape = SubResource("BoxShape3D_b7m21")
 
 [node name="HandMesh" type="CSGBox3D" parent="Scenery/Hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 size = Vector3(0.34541, 0.1, 0.1)
 material = SubResource("StandardMaterial3D_vrc4q")
 
@@ -569,7 +572,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505914, 0)
 pixel_size = 0.02
 axis = 1
 texture_filter = 2
-texture = SubResource("AtlasTexture_qkmgm")
+texture = SubResource("AtlasTexture_b7m21")
 
 [node name="ButtonBase" type="MeshInstance3D" parent="GameSetup/ShootButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
@@ -592,7 +595,7 @@ transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e
 pixel_size = 0.02
 axis = 1
 texture_filter = 2
-texture = SubResource("AtlasTexture_qkmgm")
+texture = SubResource("AtlasTexture_b7m21")
 
 [node name="ButtonBase" type="MeshInstance3D" parent="GameSetup/ShootUpButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
