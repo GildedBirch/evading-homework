@@ -4,7 +4,7 @@ extends Area2D
 
 enum ObstacleType{JUMP, SHOOT, FLY}
 @export var type: ObstacleType
-var speed: float = 1.0
+var speed: float = 150.0
 
 
 func _ready() -> void:
@@ -13,11 +13,11 @@ func _ready() -> void:
 	SignalBus.game_over.connect(_on_game_over)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if type == ObstacleType.FLY:
-		global_position.y += speed * 0.5
+		global_position.y += (speed * 0.5) * delta
 	else:
-		global_position.x -= speed
+		global_position.x -= speed * delta
 	if global_position.x < -50:
 		queue_free()
 
