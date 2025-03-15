@@ -1,5 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=40 format=3 uid="uid://beo6v36n1gjjd"]
 
+[ext_resource type="Script" uid="uid://dtp8m6mj3to3a" path="res://scenes/level/level.gd" id="1_b7m21"]
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 [ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
 [ext_resource type="Texture2D" uid="uid://dnktni5rj35oo" path="res://assets/posters/poster_1.png" id="2_xv074"]
@@ -25,6 +26,24 @@ background_energy_multiplier = 0.0
 sky = SubResource("Sky_h3e3j")
 ambient_light_energy = 0.0
 tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnne4"]
+size = Vector3(0.25, 0.2, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vpf64"]
+material = ExtResource("2_i166f")
+size = Vector3(0.2, 0.1, 0.2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkmgm"]
+atlas = ExtResource("3_qkmgm")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i166f"]
+albedo_color = Color(0.606076, 0.414131, 0.151156, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qkmgm"]
+material = SubResource("StandardMaterial3D_i166f")
+size = Vector3(0.25, 0.1, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
 albedo_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
@@ -95,27 +114,9 @@ albedo_texture = ExtResource("5_hnne4")
 uv1_triplanar = true
 texture_filter = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hnne4"]
-size = Vector3(0.25, 0.2, 0.25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vpf64"]
-material = ExtResource("2_i166f")
-size = Vector3(0.2, 0.1, 0.2)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcngd"]
 atlas = ExtResource("3_qkmgm")
 region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i166f"]
-albedo_color = Color(0.606076, 0.414131, 0.151156, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qkmgm"]
-material = SubResource("StandardMaterial3D_i166f")
-size = Vector3(0.25, 0.1, 0.25)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkmgm"]
-atlas = ExtResource("3_qkmgm")
-region = Rect2(80, 0, 8, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkmgm"]
 metallic_specular = 0.0
@@ -138,7 +139,11 @@ uv1_scale = Vector3(2, 2, 2)
 uv1_triplanar = true
 texture_filter = 0
 
-[node name="Level" type="Node"]
+[node name="Level" type="Node" node_paths=PackedStringArray("quit_button", "volume_up_button", "volume_down_button")]
+script = ExtResource("1_b7m21")
+quit_button = NodePath("QuitButton")
+volume_up_button = NodePath("VolumeUpButton")
+volume_down_button = NodePath("VolumeDownButton")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nbgty")
@@ -147,37 +152,124 @@ environment = SubResource("Environment_nbgty")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
+[node name="QuitButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0.0147179, 1.26244, 3.96094)
+button_mesh = NodePath("ButtonTop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuitButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_hnne4")
+
+[node name="ButtonTop" type="MeshInstance3D" parent="QuitButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_vpf64")
+
+[node name="Sprite3D" type="Sprite3D" parent="QuitButton/ButtonTop"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0505914, 0)
+pixel_size = 0.02
+axis = 1
+texture_filter = 2
+texture = SubResource("AtlasTexture_qkmgm")
+
+[node name="ButtonBase" type="MeshInstance3D" parent="QuitButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
+mesh = SubResource("BoxMesh_qkmgm")
+
+[node name="QuitLabel3D" type="Label3D" parent="QuitButton"]
+transform = Transform3D(1, -8.74227e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, -8.74228e-08, -1, -4.37114e-08, 4.65661e-09, 0.0722594, -0.224889)
+texture_filter = 0
+text = "Quit game"
+font = ExtResource("5_sytrn")
+
+[node name="VolumeUpButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0.164718, 0.812436, 3.96094)
+button_mesh = NodePath("ButtonTop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VolumeUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_hnne4")
+
+[node name="ButtonTop" type="MeshInstance3D" parent="VolumeUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_vpf64")
+
+[node name="Sprite3D" type="Sprite3D" parent="VolumeUpButton/ButtonTop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505914, 0)
+pixel_size = 0.02
+axis = 1
+texture_filter = 2
+texture = SubResource("AtlasTexture_qkmgm")
+
+[node name="ButtonBase" type="MeshInstance3D" parent="VolumeUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
+mesh = SubResource("BoxMesh_qkmgm")
+
+[node name="QuitLabel3D" type="Label3D" parent="VolumeUpButton"]
+transform = Transform3D(1, -8.74227e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, -8.74228e-08, -1, -4.37114e-08, 0.15, 0.0722594, -0.22489)
+texture_filter = 0
+text = "Volume"
+font = ExtResource("5_sytrn")
+
+[node name="VolumeDownButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -0.185282, 0.812436, 3.96094)
+button_mesh = NodePath("ButtonTop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VolumeDownButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_hnne4")
+
+[node name="ButtonTop" type="MeshInstance3D" parent="VolumeDownButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_vpf64")
+
+[node name="Sprite3D" type="Sprite3D" parent="VolumeDownButton/ButtonTop"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0505914, 0)
+pixel_size = 0.02
+axis = 1
+texture_filter = 2
+texture = SubResource("AtlasTexture_qkmgm")
+
+[node name="ButtonBase" type="MeshInstance3D" parent="VolumeDownButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
+mesh = SubResource("BoxMesh_qkmgm")
+
 [node name="Scenery" type="Node3D" parent="."]
 
 [node name="room" type="Node3D" parent="Scenery"]
 
 [node name="Floor" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+use_collision = true
 size = Vector3(6, 3, 0.2)
 material = SubResource("StandardMaterial3D_xv074")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
+use_collision = true
 size = Vector3(6, 3, 0.2)
 material = SubResource("StandardMaterial3D_xv074")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 1.5, 1.5)
+use_collision = true
 size = Vector3(0.2, 3, 5.2)
 material = SubResource("StandardMaterial3D_xv074")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 1.5, 1.5)
+use_collision = true
 size = Vector3(0.2, 3, 5.2)
 material = SubResource("StandardMaterial3D_xv074")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Scenery/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 1.5)
+use_collision = true
 size = Vector3(6.4, 0.2, 5.2)
 material = SubResource("StandardMaterial3D_m0bv2")
 
@@ -428,11 +520,12 @@ material = SubResource("StandardMaterial3D_x4oov")
 [node name="GameSetup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39454)
 
-[node name="GameScreen" parent="GameSetup" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button", "shoot_up_button", "music_player", "effect_player") instance=ExtResource("4_qkmgm")]
+[node name="GameScreen" parent="GameSetup" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button", "shoot_up_button", "quit_button", "music_player", "effect_player") instance=ExtResource("4_qkmgm")]
 target_screen = NodePath("../Screen")
 jump_button = NodePath("../JumpButton")
 shoot_button = NodePath("../ShootButton")
 shoot_up_button = NodePath("../ShootUpButton")
+quit_button = NodePath("../../QuitButton")
 music_player = NodePath("../MusicPlayer")
 effect_player = NodePath("../EffectPlayer")
 

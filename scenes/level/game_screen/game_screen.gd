@@ -22,6 +22,7 @@ const SOUNDS: Dictionary = {
 @export var jump_button: Button3D
 @export var shoot_button: Button3D
 @export var shoot_up_button: Button3D
+@export var quit_button: Button3D
 @export var music_player: AudioStreamPlayer3D
 @export var effect_player: AudioStreamPlayer3D
 var _game_running:bool = false
