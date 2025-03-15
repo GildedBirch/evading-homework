@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://beo6v36n1gjjd"]
+[gd_scene load_steps=20 format=3 uid="uid://beo6v36n1gjjd"]
 
 [ext_resource type="PackedScene" uid="uid://j13dmisih20f" path="res://scenes/button3d/button_3d.tscn" id="1_h3e3j"]
 [ext_resource type="Material" uid="uid://dx4o2tm7p7d7v" path="res://assets/buttons/button_material.tres" id="2_i166f"]
@@ -48,6 +48,16 @@ metallic_specular = 0.0
 [sub_resource type="QuadMesh" id="QuadMesh_hnne4"]
 size = Vector2(1.2, 0.6)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnne4"]
+albedo_color = Color(0.66095, 0.645848, 0.55416, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpf64"]
+albedo_color = Color(0.169245, 0.169245, 0.169245, 1)
+roughness = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qkmgm"]
+size = Vector3(1, 1.41107, 0.526489)
+
 [node name="Level" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -62,58 +72,102 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8y3pp")
 
-[node name="JumpButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.160472, 0.559653, 0)
+[node name="GameSetup" type="Node3D" parent="."]
+
+[node name="GameScreen" parent="GameSetup" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button", "shoot_up_button") instance=ExtResource("4_qkmgm")]
+target_screen = NodePath("../Screen")
+jump_button = NodePath("../JumpButton")
+shoot_button = NodePath("../ShootButton")
+shoot_up_button = NodePath("../ShootUpButton")
+
+[node name="JumpButton" parent="GameSetup" node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00150104, 0.559653, -0.0320297)
 button_mesh = NodePath("ButtonTop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="JumpButton"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameSetup/JumpButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_hnne4")
 
-[node name="ButtonTop" type="MeshInstance3D" parent="JumpButton"]
+[node name="ButtonTop" type="MeshInstance3D" parent="GameSetup/JumpButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_vpf64")
 
-[node name="Sprite3D" type="Sprite3D" parent="JumpButton/ButtonTop"]
+[node name="Sprite3D" type="Sprite3D" parent="GameSetup/JumpButton/ButtonTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505914, 0)
 pixel_size = 0.02
 axis = 1
 texture_filter = 2
 texture = SubResource("AtlasTexture_wcngd")
 
-[node name="ButtonBase" type="MeshInstance3D" parent="JumpButton"]
+[node name="ButtonBase" type="MeshInstance3D" parent="GameSetup/JumpButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
 mesh = SubResource("BoxMesh_qkmgm")
 
-[node name="ShootButton" parent="." node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.150644, 0.559653, 0)
+[node name="ShootButton" parent="GameSetup" node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.464718, 0.559653, -0.0320297)
 button_mesh = NodePath("ButtonTop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShootButton"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameSetup/ShootButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_hnne4")
 
-[node name="ButtonTop" type="MeshInstance3D" parent="ShootButton"]
+[node name="ButtonTop" type="MeshInstance3D" parent="GameSetup/ShootButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_vpf64")
 
-[node name="Sprite3D" type="Sprite3D" parent="ShootButton/ButtonTop"]
+[node name="Sprite3D" type="Sprite3D" parent="GameSetup/ShootButton/ButtonTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0505914, 0)
 pixel_size = 0.02
 axis = 1
 texture_filter = 2
 texture = SubResource("AtlasTexture_qkmgm")
 
-[node name="ButtonBase" type="MeshInstance3D" parent="ShootButton"]
+[node name="ButtonBase" type="MeshInstance3D" parent="GameSetup/ShootButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
 mesh = SubResource("BoxMesh_qkmgm")
 
-[node name="Screen" type="MeshInstance3D" parent="."]
+[node name="ShootUpButton" parent="GameSetup" node_paths=PackedStringArray("button_mesh") instance=ExtResource("1_h3e3j")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.463955, 0.559653, -0.0320297)
+button_mesh = NodePath("ButtonTop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameSetup/ShootUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_hnne4")
+
+[node name="ButtonTop" type="MeshInstance3D" parent="GameSetup/ShootUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_vpf64")
+
+[node name="Sprite3D" type="Sprite3D" parent="GameSetup/ShootUpButton/ButtonTop"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, 0, 0.0505914, 0)
+pixel_size = 0.02
+axis = 1
+texture_filter = 2
+texture = SubResource("AtlasTexture_qkmgm")
+
+[node name="ButtonBase" type="MeshInstance3D" parent="GameSetup/ShootUpButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03551, 0)
+mesh = SubResource("BoxMesh_qkmgm")
+
+[node name="Screen" type="MeshInstance3D" parent="GameSetup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_qkmgm")
 mesh = SubResource("QuadMesh_hnne4")
+skeleton = NodePath("../..")
 
-[node name="GameScreen" parent="Screen" node_paths=PackedStringArray("target_screen", "jump_button", "shoot_button") instance=ExtResource("4_qkmgm")]
-target_screen = NodePath("..")
-jump_button = NodePath("../../JumpButton")
-shoot_button = NodePath("../../ShootButton")
+[node name="Monitor" type="CSGBox3D" parent="GameSetup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.707581, -0.236389)
+size = Vector3(1.41382, 1.41516, 0.527222)
+material = SubResource("StandardMaterial3D_hnne4")
+
+[node name="MonitorCutout" type="CSGBox3D" parent="GameSetup/Monitor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.294388, 0)
+operation = 2
+size = Vector3(1.18555, 0.585297, 0.527222)
+material = SubResource("StandardMaterial3D_vpf64")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameSetup"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameSetup/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.706765, -0.236755)
+shape = SubResource("BoxShape3D_qkmgm")

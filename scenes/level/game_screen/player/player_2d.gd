@@ -27,7 +27,7 @@ func jump() -> void:
 		velocity.y = JUMP_VELOCITY
 
 
-func shoot() -> void:
+func shoot(dir: Projectile.MoveDirection) -> void:
 	if not can_shoot:
 		return
 
@@ -35,6 +35,7 @@ func shoot() -> void:
 	var projectile: Projectile = PROJECTILE.instantiate()
 	add_child(projectile)
 	projectile.global_position = global_position - Vector2(0, 20)
+	projectile.direction = dir
 	bullet_cooldown_timer.start()
 
 

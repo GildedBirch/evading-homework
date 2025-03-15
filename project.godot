@@ -52,6 +52,11 @@ interact={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="Default"
+3d_render/layer_2="Hand"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

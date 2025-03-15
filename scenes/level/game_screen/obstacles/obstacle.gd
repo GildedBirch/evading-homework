@@ -15,6 +15,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	global_position.x -= speed
+	if global_position.x < -50:
+		queue_free()
 
 
 func _on_body_entered(_body: Node2D) -> void:
